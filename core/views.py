@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from rest_framework import generics, permissions
 from .models import Tarefa
 from .forms import TarefaForm
+from .serializers import TarefaSerializer
+
 
 def registro(request):
     if request.method == 'POST':
@@ -15,6 +18,7 @@ def registro(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/registro.html', {'form': form})
+
 
 @login_required
 def inicio(request):
@@ -35,6 +39,7 @@ def inicio(request):
     }
     return render(request, 'core/inicio.html', contexto)
 
+
 @login_required
 def concluir(request, id):
     tarefa = get_object_or_404(Tarefa, id=id, usuario=request.user)
@@ -42,8 +47,30 @@ def concluir(request, id):
     tarefa.save()
     return redirect('inicio')
 
+
 @login_required
 def deletar(request, id):
     tarefa = get_object_or_404(Tarefa, id=id, usuario=request.user)
     tarefa.delete()
     return redirect('inicio')
+
+
+# API REST
+
+class TarefaListCreateAPI(generics.ListCreateAPIView):
+    serializer_class = TarefaSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Tarefa.objects.filter(usuario=self.request.user).order_by('-criada_em')
+
+    def perform_create(self, serializer):
+        serializer.save(usuario=self.request.user)
+
+
+class TarefaDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TarefaSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Tarefa.objects.filter(usuario=self.request.user)

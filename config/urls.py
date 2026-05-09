@@ -9,4 +9,7 @@ urlpatterns = [
     path('deletar/<int:id>/', views.deletar, name='deletar'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/registro/', views.registro, name='registro'),
+    # API
+    path('api/tarefas/', views.TarefaListCreateAPI.as_view(), name='api-tarefas'),
+    path('api/tarefas/<int:pk>/', views.TarefaDetailAPI.as_view(), name='api-tarefa-detail'),
 ]
