@@ -1,14 +1,19 @@
 from pathlib import Path
+import os
 
 # Base directory do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Segurança
-SECRET_KEY = 'django-insecure-chave-apenas-para-desenvolvimento-local'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-chave-apenas-para-desenvolvimento-local')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://gerenciador-tarefas-production-11b7.up.railway.app',
+]
 
 # Aplicações instaladas
 INSTALLED_APPS = [
