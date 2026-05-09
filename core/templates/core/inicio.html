@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Tarefas</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+    <div class="container">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+            <h1>📝 Minhas Tarefas</h1>
+            <span>
+                Olá, <strong>{{ request.user.username }}</strong> |
+                <a href="/accounts/logout/" style="color:#ea4335;">Sair</a>
+            </span>
+        </div>
+
+        <form method="post" class="form-adicionar">
+            {% csrf_token %}
+            {{ form.titulo }}
+            <button type="submit">Adicionar</button>
+        </form>
+
+        {% if tarefas %}
+            <ul>
+                {% for tarefa in tarefas %}
+                    <li class="tarefa-item {% if tarefa.concluida %}concluida{% endif %}">
+                        <span class="titulo">
+                            {% if tarefa.concluida %} ✅ {% else %} ⏳ {% endif %}
+                            {{ tarefa.titulo }}
+                        </span>
+                        <div class="acoes">
+                            <a href="{% url 'concluir' tarefa.id %}"
+                               class="{% if tarefa.concluida %}btn-reabrir{% else %}btn-concluir{% endif %}">
+                                {% if tarefa.concluida %} Reabrir {% else %} Concluir {% endif %}
+                            </a>
+                            <a href="{% url 'deletar' tarefa.id %}" class="btn-deletar">Deletar</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="vazio">Nenhuma tarefa cadastrada ainda.</p>
+        {% endif %}
+
+    </div>
+</body>
+</html>

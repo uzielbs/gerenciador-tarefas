@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    color: #1a73e8;
+}
+
+.form-adicionar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.form-adicionar input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-adicionar input:focus {
+    border-color: #1a73e8;
+}
+
+.form-adicionar button {
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.form-adicionar button:hover {
+    background-color: #1558b0;
+}
+
+ul {
+    list-style: none;
+}
+
+.tarefa-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #1a73e8;
+    transition: background 0.2s;
+}
+
+.tarefa-item.concluida {
+    border-left-color: #34a853;
+    opacity: 0.7;
+}
+
+.tarefa-item.concluida .titulo {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.titulo {
+    flex: 1;
+    font-size: 1rem;
+}
+
+.acoes {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-concluir {
+    padding: 6px 12px;
+    background-color: #34a853;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-concluir:hover {
+    background-color: #2d8f47;
+}
+
+.btn-reabrir {
+    padding: 6px 12px;
+    background-color: #fbbc04;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.btn-deletar {
+    padding: 6px 12px;
+    background-color: #ea4335;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-deletar:hover {
+    background-color: #c5221f;
+}
+
+.vazio {
+    text-align: center;
+    color: #888;
+    padding: 30px 0;
+}

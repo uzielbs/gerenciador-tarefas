@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Login</h1>
+
+        <form method="post" class="form-adicionar" style="flex-direction: column; gap: 14px;">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+
+        {% if form.errors %}
+            <p style="color: red; margin-top: 10px;">Usuário ou senha inválidos.</p>
+        {% endif %}
+        <p style="margin-top:20px; text-align:center;">
+            Não tem conta? <a href="/accounts/registro/">Criar conta</a>
+        </p>
+    </div>
+</body>
+</html>
