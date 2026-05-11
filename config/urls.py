@@ -12,4 +12,5 @@ urlpatterns = [
     # API
     path('api/tarefas/', views.TarefaListCreateAPI.as_view(), name='api-tarefas'),
     path('api/tarefas/<int:pk>/', views.TarefaDetailAPI.as_view(), name='api-tarefa-detail'),
+    path('api-auth/', include('rest_framework.urls')),
 ]
